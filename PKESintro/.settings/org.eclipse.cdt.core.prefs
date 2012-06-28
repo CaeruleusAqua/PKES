@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/de.innot.avreclipse.configuration.app.debug.1333936317/AVRDUDEOPTIONS/delimiter=\:
+environment/project/de.innot.avreclipse.configuration.app.debug.1333936317/AVRDUDEOPTIONS/operation=replace
+environment/project/de.innot.avreclipse.configuration.app.debug.1333936317/AVRDUDEOPTIONS/value=-pat90can128 -cavr911 -P/dev/ttyUSB0 -b19200
+environment/project/de.innot.avreclipse.configuration.app.debug.1333936317/append=true
+environment/project/de.innot.avreclipse.configuration.app.debug.1333936317/appendContributed=true
