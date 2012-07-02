@@ -9,8 +9,10 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+#include <stdlib.h>
 #include <util/atomic.h>
 #include "define.h"
+#include <util/setbaud.h>
 #include "prototype.h"
 #include "space.h"
 #include "init.h"
@@ -20,45 +22,47 @@
 #include "interrupt.h"
 #include "regler.h"
 #include "debug.h"
+#include "serial.h"
 
 int main(void) {
 	init();
 	sei();
 	//enableACD();
-	//lineInit();
-	//distInit();
 	VccOn(6);
+	uint16_t s = 0;
 	VccOn(7);
 	_delay_ms(100);
 	while (1) {
-		//line();
-		//dist();
-		if (tickslinks < 500)
+
+		if (tickslinks < 120)
 			setMotorBaseSpeed_1(500);
 		else
 			setMotorBaseSpeed_1(0);
 
-		if (ticksrechts < 500)
+		if (ticksrechts < 120)
 			setMotorBaseSpeed_2(500);
 		else
 			setMotorBaseSpeed_2(0);
 
-		if (pushButton(2)) {
-			modMotorBaseSpeed_1(50);
-			modMotorBaseSpeed_2(50);
-		}
 		if (pushButton(0)) {
-			modMotorBaseSpeed_1(-50);
-			modMotorBaseSpeed_2(-50);
-		}
-		if (pushButton(0)) {
-			modMotorBaseSpeed_1(-50);
-			modMotorBaseSpeed_2(-50);
+			tickslinks = 0;
+			ticksrechts = 0;
+			s = 382;
+
 		}
 		if (pushButton(1)) {
-			modMotorBaseSpeed_1(255);
-			modMotorBaseSpeed_2(255);
+			tickslinks = 0;
+			ticksrechts = 0;
+			s = 573;
+
 		}
+		if (pushButton(2)) {
+			tickslinks = 0;
+			ticksrechts = 0;
+			s = 764;
+
+		}
+		//strecke(s);
 		adjSpeed();
 	}
 

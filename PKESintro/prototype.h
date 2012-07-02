@@ -31,4 +31,7 @@ void blink(int8_t x);
 void steuer(int16_t richtung);
 uint8_t pushButton(uint8_t button);
 uint16_t getData();
-
+void USART0_Transmit(unsigned char data);
+unsigned char USART0_Receive(void);
+void handle_command(char com[]);
+char * strcat(char *dest, char *src);

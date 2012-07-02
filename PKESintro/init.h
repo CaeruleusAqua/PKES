@@ -52,23 +52,33 @@ void init() {
 	S.bSbutton_S1 = 0;
 	S.bSbutton_S2 = 0;
 	S.bSbutton_S3 = 0;
-	tickslinks=0;
-	ticksrechts=0;
-	richtung=gerade;
+	tickslinks = 0;
+	ticksrechts = 0;
+	richtung = gerade;
 	//-------------------------------- Interrupt ------------------------------
-	EIMSK=0;
-	EICRA=0;
+	EIMSK = 0;
+	EICRA = 0;
 	EICRA |= ((1 << ISC21) | (0 << ISC20) | (1 << ISC31) | (0 << ISC30));
 	EIMSK |= ((1 << INT2) | (1 << INT3));
 	DDRD = 0; // alles auf eingang
+
+	//--------------------------------- UART ----------------------------------
+
+	/* Set baud rate */
+	UBRR0H = UBRRH_VALUE;
+	UBRR0L = UBRRL_VALUE;
+	/* Set frame format: 8data, no parity & 2 stop bits */
+	UCSR0C = (0 << UMSEL0) | (0 << UPM0) | (1 << USBS0) | (3 << UCSZ0);
+	/* Enable receiver and transmitter */
+	UCSR0B = (1 << RXEN0) | (1 << TXEN0) |(1<<RXCIE0);
 }
 
-void lineInit(){
+void lineInit() {
 	VccOn(CNY70_1);
 	VccOn(CNY70_2);
 }
 
-void distInit(){
+void distInit() {
 	VccOn(ds1);
 	VccOn(ds2);
 	VccOn(ds3);

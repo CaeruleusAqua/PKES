@@ -5,6 +5,19 @@
  *      Author: time
  */
 
+//-------------------------------- USART -------------------------------
+
+#ifndef F_CPU
+#warning "F_CPU war noch nicht definiert, wird nun nachgeholt mit 16000000"
+#define F_CPU 16000000UL  // Systemtakt in Hz - Definition als unsigned long beachten
+	// Ohne ergeben sich unten Fehler in der Berechnung
+#endif
+
+#define BAUD 19200UL      // Baudrate
+#define UART_MAXSTRLEN 30
+
+
+
 /*! Makros for led control*/
 #define ledOn(x)	(PORTA |= (1<<x))
 #define ledOff(x) 	(PORTA &=~(1<<x))

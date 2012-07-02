@@ -107,8 +107,8 @@ void strecke(uint16_t s){
 	int er=s-ticksrechts;
 	esuml+=el;
 	esumr+=er;
-	modMotorSpeed_1(el+esuml);
-	modMotorSpeed_2(er-esuml);
+	setMotorBaseSpeed_1(el+esuml);
+	setMotorBaseSpeed_2(er-esuml);
 	if (esuml < -200) {
 		esuml = -200;
 	}

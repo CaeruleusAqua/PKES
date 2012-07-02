@@ -9,6 +9,11 @@ volatile uint16_t tickslinks=0;
 volatile uint16_t ticksrechts=0;
 
 
+volatile uint8_t uart_str_complete = 0;     // 1 .. String komplett empfangen
+volatile uint8_t uart_str_count = 0;
+volatile char uart_string[UART_MAXSTRLEN + 1] = "";
+
+
 struct {
 	unsigned bSbutton_S0 :1;
 	unsigned bSbutton_S1 :1;
