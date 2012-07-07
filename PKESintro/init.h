@@ -67,12 +67,10 @@ void init() {
 	 //--------------------------------- UART ----------------------------------
 	 */
 	/* Set baud rate */
-	//DDRD=0;
-	//DDRD|=(1 << 3);
 	UBRR1H = UBRRH_VALUE;
 	UBRR1L = UBRRL_VALUE;
 	/* Set frame format: 8data, no parity & 2 stop bits */
-	UCSR1C = (0 << UMSEL1) | (0 << UPM1) | (1 << USBS1) | (3 << UCSZ1);
+	UCSR1C = (0 << UMSEL1) | (0 << UPM1) | (1 << USBS1) | (1 << UCSZ11) | (1 << UCSZ10) ;
 	/* Enable receiver and transmitter */
 	UCSR1B = (1 << RXEN1) | (1 << TXEN1) | (1 << RXCIE1);
 }
