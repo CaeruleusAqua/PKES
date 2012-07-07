@@ -56,21 +56,25 @@ void init() {
 	ticksrechts = 0;
 	richtung = gerade;
 	//-------------------------------- Interrupt ------------------------------
-	EIMSK = 0;
-	EICRA = 0;
-	EICRA |= ((1 << ISC21) | (0 << ISC20) | (1 << ISC31) | (0 << ISC30));
-	EIMSK |= ((1 << INT2) | (1 << INT3));
-	DDRD = 0; // alles auf eingang
-
-	//--------------------------------- UART ----------------------------------
-
+	/*
+	 UCSR1A=0;
+	 UCSR1B=0;
+	 EIMSK = 0;
+	 EICRA = 0;
+	 EICRA |= ((1 << ISC21) | (0 << ISC20) | (1 << ISC31) | (0 << ISC30));
+	 EIMSK |= ((1 << INT2) | (1 << INT3));
+	 DDRD = 0; // alles auf eingang
+	 //--------------------------------- UART ----------------------------------
+	 */
 	/* Set baud rate */
-	UBRR0H = UBRRH_VALUE;
-	UBRR0L = UBRRL_VALUE;
+	//DDRD=0;
+	//DDRD|=(1 << 3);
+	UBRR1H = UBRRH_VALUE;
+	UBRR1L = UBRRL_VALUE;
 	/* Set frame format: 8data, no parity & 2 stop bits */
-	UCSR0C = (0 << UMSEL0) | (0 << UPM0) | (1 << USBS0) | (3 << UCSZ0);
+	UCSR1C = (0 << UMSEL1) | (0 << UPM1) | (1 << USBS1) | (3 << UCSZ1);
 	/* Enable receiver and transmitter */
-	UCSR0B = (1 << RXEN0) | (1 << TXEN0) |(1<<RXCIE0);
+	UCSR1B = (1 << RXEN1) | (1 << TXEN1) | (1 << RXCIE1);
 }
 
 void lineInit() {

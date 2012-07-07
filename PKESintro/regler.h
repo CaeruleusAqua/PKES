@@ -103,12 +103,20 @@ void dist() {
 }
 
 void strecke(uint16_t s){
-	int el=s-tickslinks;
-	int er=s-ticksrechts;
-	esuml+=el;
-	esumr+=er;
-	setMotorBaseSpeed_1(el+esuml);
-	setMotorBaseSpeed_2(er-esuml);
+	uint16_t el=-(s-tickslinks);
+	uint16_t er=-(s-ticksrechts);
+	esuml+=(el>>8);
+	esumr+=(er>>8);
+	if(tickslinks>s+10){
+		esuml=0;
+		el=0;
+	}
+	if(ticksrechts>s+10){
+		esumr=0;
+		er=0;
+	}
+	setMotorBaseSpeed_1((er>>8)+esumr);
+	setMotorBaseSpeed_2((el>>8)+esuml);
 	if (esuml < -200) {
 		esuml = -200;
 	}

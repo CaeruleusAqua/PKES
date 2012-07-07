@@ -28,23 +28,12 @@ int main(void) {
 	init();
 	sei();
 	//enableACD();
-	VccOn(6);
-	uint16_t s = 0;
-	VccOn(7);
+	//VccOn(6);
+	//VccOn(7);
+	//uint16_t s = 0;
 	_delay_ms(100);
 	while (1) {
-
-		if (tickslinks < 120)
-			setMotorBaseSpeed_1(500);
-		else
-			setMotorBaseSpeed_1(0);
-
-		if (ticksrechts < 120)
-			setMotorBaseSpeed_2(500);
-		else
-			setMotorBaseSpeed_2(0);
-
-		if (pushButton(0)) {
+		/*if (pushButton(0)) {
 			tickslinks = 0;
 			ticksrechts = 0;
 			s = 382;
@@ -62,8 +51,10 @@ int main(void) {
 			s = 764;
 
 		}
-		//strecke(s);
+		strecke(s);
 		adjSpeed();
+*/		_delay_ms(100);
+
 	}
 
 	return (1); // sollte nie erreicht werden
