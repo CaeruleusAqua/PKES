@@ -13,14 +13,6 @@ void USART1_Transmit(char data) {
 	UDR1 = data; // Put data into buffer, sends the data
 }
 
-unsigned char USART0_Receive(void) {
-
-	while (!(UCSR1A & (1 << RXC1)))
-		; // Wait for data to be received
-
-	return UDR1; // Get and return received data from buffer
-}
-
 void uart_puts(char *s) {
 	while (*s) { /* so lange *s != '\0' also ungleich dem "String-Endezeichen(Terminator)" */
 		USART1_Transmit(*s);
@@ -31,8 +23,9 @@ void uart_puts(char *s) {
 void handle_command(char *com) {
 	if (com[0] == 'b') { //Version Handler
 		uart_puts("Robby serial Interface");
-	}
-	if (com[0] == 'D') {
+	} else
+
+	if (com[0] == 'D') {//SET MOTOR SPEED
 		if (!com[1]) {
 			uart_puts("error");
 			return;
@@ -53,9 +46,9 @@ void handle_command(char *com) {
 		uart_puts(itoa(r, s, 10));
 		setMotorBaseSpeed_1(l);
 		setMotorBaseSpeed_2(r);
-	}
+	} else
 
-	if (com[0] == 'E') {
+	if (com[0] == 'E') {//GET MOTOR SPEED
 		char sr[30];
 		char sl[30];
 		char dest[30] = "e,";
@@ -63,18 +56,18 @@ void handle_command(char *com) {
 		strcat(dest, ",");
 		strcat(dest, itoa(Motor_2_Speed, sl, 10));
 		uart_puts(dest);
-	}
-
-	if (com[0] == 'I') {
+	} else if (com[0] == 'I') {//SET ADC
 		if (!com[1]) {
 			uart_puts("error");
 			return;
 		}
-		setADC(com[2]-'0');
+		setADC(com[2] - '0');
 		char s[20];
 		char dest[] = "i,";
-		strcat(dest,utoa(getData(),s,10));
+		strcat(dest, utoa(getData(), s, 10));
 		uart_puts(dest);
+	} else  {
+		uart_puts("unknown command");
 	}
 
 }
